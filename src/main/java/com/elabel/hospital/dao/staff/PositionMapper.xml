@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.elabel.hospital.dao.staff.PositionMapper">
+    <insert id="insertPosition" parameterType="Position" >
+        INSERT INTO position(name,superior_position_id)VALUES(#{name},#{superiorPositionId});
+    </insert>
+    <select id="selectPosition" resultType="com.elabel.hospital.pojo.staff.Position">
+        SELECT * FROM v_position
+        <if test="limit!=null">
+            limit ${offset},${limit}
+        </if>;
+    </select>
+    
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM v_position;
+    </select>
+
+    <update id="updatePosition" parameterType="Position">
+        UPDATE position
+        SET name = #{name}
+        <if test="superiorPositionId!=null">
+            ,superior_position_id = #{superiorPositionId}
+        </if>
+        WHERE id = #{id};
+    </update>
+
+    <delete id="deletePosition">
+        DELETE FROM position
+        WHERE id = #{id};
+    </delete>
+</mapper>

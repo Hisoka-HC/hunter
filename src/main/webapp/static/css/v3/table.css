@@ -1,0 +1,153 @@
+.realTablePane{
+    overflow:auto;
+    height:50%;
+    border: 1px solid #EEE
+}
+
+.main-table th, .main-table td {
+    white-space: nowrap;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+}
+
+.main-table thead {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.main-table thead, .main-table tbody {
+    border: 1px solid #EEE
+}
+
+.main-table td {
+    font-size: 12px;
+    cursor: pointer;
+    border-left:1px solid #E2E2E2
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #fff6f4;
+}
+
+.main-table tbody tr:hover {
+    background-color: #ffe6cc;
+}
+
+.tableName {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding-left: 1px;
+    border-top: 2px solid #F5F5F5
+}
+
+.tableHelper {
+    margin-bottom: 10px
+}
+
+.province-selector, .city-selector, .store-selector {
+    width: 75px;
+    margin-left: 15px;
+    font-size: 12px;
+    padding-left: 3px;
+    height: 25px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    border: 1px solid #CCC
+}
+
+.option {
+    letter-spacing: 1px !important;
+}
+
+.keyword-label {
+    margin-left: 30px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.keyword-input {
+    width: 120px;
+    /* margin-left: 15px; */
+    height: 25px;
+    border-radius: 2px;
+    outline: 0px;
+    border: 1px solid #CCC;
+    padding-left: 3px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.keyword-button {
+    margin-left: 15px;
+    width: 75px;
+    height: 25px;
+    line-height: 25px;
+    padding-top: 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+    border-radius: 2px !important;
+    margin-top: -3px
+}
+
+.functionPane {
+    margin: 15px 0 10px 0;
+    padding:15px 0;
+    border-top: 2px solid #F5F5F5;
+    border-bottom: 2px solid #F5F5F5;
+}
+
+.functionPane i {
+    padding: 0 10px 0 7px;
+}
+
+.tableFunctionButton {
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.tableFunctionButton:hover {
+    color: #C06016
+}
+
+.tableFunctionButton.disabled {
+    color: #888;
+    cursor: default;
+}
+
+.tableFooter {
+    text-align: right;
+    width: 100%;
+    margin-top: 10px;
+    color: #888;
+    font-size: 12px;
+}
+
+.tableFooter ul {
+    float: right
+}
+
+.tableFooter li {
+    list-style: none;
+    float: left;
+}
+
+.tableFooter button {
+    height: 16px;
+    line-height: 16px;
+    padding: 0;
+    margin: 0 2px;
+    width: 12px;
+    border: 0;
+    border-bottom: 1px solid #CCC;
+    background-color: #f9f9f9;
+}
+
+.tableFooter button.theone {
+    border-bottom: 1px solid #E08031;
+    color: #555
+}

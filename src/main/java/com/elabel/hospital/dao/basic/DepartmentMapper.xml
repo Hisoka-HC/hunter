@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.elabel.hospital.dao.basic.DepartmentMapper">
+
+    <resultMap id="ResultMap" type="Department">
+        <id property="id" column="id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="name" column="department_name"/>
+        <collection property="roomList" ofType="Room" resultMap="RoomResultMap"/>
+    </resultMap>
+
+    <resultMap id="RoomResultMap" type="Room">
+        <id property="id" column="room_id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="name" column="room_name"/>
+        <result property="floorId" column="floor_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="departmentId" column="department_id"/>
+        <collection property="bedList" column="bed_room_id" resultMap="BedResultMap"/>
+    </resultMap>
+
+    <resultMap id="BedResultMap" type="Bed">
+        <id property="id" column="bed_id"/>
+        <result property="roomId" column="bed_room_id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="floorId" column="floor_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="roomId" column="room_id"/>
+        <result property="roomName" column="room_name"/>
+        <association property="patient" resultMap="Patient"/>
+    </resultMap>
+
+    <resultMap id="Patient" type="Patient">
+        <id property="id" column="patient_id"/>
+        <result property="name" column="patient_name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="admittedTime" column="admitted_time"/>
+    </resultMap>
+
+
+    <insert id="insertDepartment" parameterType="Department" >
+        INSERT INTO department(name,hospital_id)VALUES(#{name},#{hospitalId});
+    </insert>
+    <select id="selectDepartment" resultType="Department">
+        SELECT * FROM department
+        <if test="limit!=null">
+            limit ${offset},${limit}
+        </if>;
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM department;
+    </select>
+
+    <select id="selectWhereByKey" resultType="com.elabel.hospital.pojo.basic.Department">
+        SELECT * FROM department
+        WHERE id = #{departmentId};
+    </select>
+
+
+    <update id="updateDepartment" parameterType="Department">
+        UPDATE department
+        SET name = #{name}
+        <if test="hospitalId!=null">
+            ,hospital_id=#{hospitalId}
+        </if>
+        WHERE id = #{id};
+    </update>
+    <delete id="deleteDepartment">
+        DELETE FROM department
+        WHERE id = #{id};
+    </delete>
+
+    <select id="selectByDepartment" resultMap="ResultMap">
+        SELECT dp.id,dp.name department_name,dp.hospital_id
+        ,room.name AS room_name,room.`department_id`,room.`id` AS room_id
+        ,bed.`name`,bed.`id` AS bed_id
+        ,patient.id AS petient_id,patient.name AS patient_name,patient.age,patient.gender,patient.admitted_time
+        FROM department dp
+        LEFT JOIN hospital ON dp.`hospital_id`=hospital.`id`
+        LEFT JOIN room ON dp.`id` = room.`department_id`
+        LEFT JOIN bed ON room.id = bed.room_id
+        LEFT JOIN patient ON bed.`id` = patient.`bed_id`
+        WHERE 1=1
+        <if test="departmentName!=null">
+            AND department.`name`=#{departmentName}
+        </if>
+        <if test="roomName!=null">
+            AND room.`name` = #{roomName}
+        </if>
+        <if test="bedName!=null">
+            AND bed.`name`= #{bedName}
+        </if>
+        <if test="patientName!=null">
+            AND patient.`name`=#{patientName}
+        </if>
+        <if test="patientAge!=null">
+            AND patient.`age` = #{patientAge}
+        </if>
+        <if test="patientGender!=null">
+            AND patient.`gender` = #{patientGender}
+        </if>
+        <if test="diseaseName!=null">
+            AND disease.`name` = #{diseaseName}
+        </if>
+        <if test="keyword!=null">
+            AND (patientName like '%${keyword}%' or diseaseName like '%${keyword}%')
+        </if>
+        <if test="firstKeyword!=null">
+            AND (patientName like '${firstKeyword}%' or diseaseName like '${firstKeyword}%')
+        </if>
+        <if test="order!=null">
+            ORDER BY #{order}
+        </if>;
+    </select>
+</mapper>

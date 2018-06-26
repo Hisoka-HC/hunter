@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.elabel.hospital.dao.basic.FloorMapper">
+    <insert id="insertFloor" parameterType="Floor">
+        INSERT INTO floor (name, hospital_id) VALUES (#{name}, #{hospitalId});
+    </insert>
+
+    <select id="selectFloor" resultMap="VFloor">
+        SELECT *
+        FROM v_floor
+        <if test="limit!=null">
+            limit ${offset},${limit}
+        </if>
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM v_floor;
+    </select>
+
+    <update id="updateFloor" parameterType="Floor">
+        UPDATE floor
+        SET name = #{name}
+        <if test="hospitalId!=null">
+            ,hospital_id=#{hospitalId}
+        </if>
+        WHERE id = #{id};
+    </update>
+
+    <delete id="deleteFloor">
+        DELETE FROM floor
+        WHERE id = #{id};
+    </delete>
+
+
+    <resultMap id="VFloor" type="Floor">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="roomCount" column="room_count"/>
+        <result property="bedCount" column="bed_count"/>
+        <result property="availableCount" column="available_count"/>
+    </resultMap>
+
+    <resultMap id="FloorResultMap" type="com.elabel.hospital.pojo.basic.Floor">
+        <id property="id" column="id" />
+        <result property="hospitalId" column="hospital_id" />
+        <result property="name" column="name" />
+        <result property="roomCount" column="room_count"/>
+        <result property="bedCount" column="bed_count"/>
+        <collection property="roomList" resultMap="RoomResultMap" ofType="Room"/>
+    </resultMap>
+
+    <resultMap id="RoomResultMap" type="com.elabel.hospital.pojo.basic.Room">
+        <id property="id" column="ID"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="name" column="name"/>
+        <result property="floorId" column="floor_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="bedCount" column="bed_count"/>
+        <collection property="bedList" column="room_id" resultMap="BedResultMap" />
+    </resultMap>
+
+    <resultMap id="BedResultMap" type="com.elabel.hospital.pojo.basic.Bed">
+        <id property="id" column="id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="floorId" column="floor_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="roomId" column="room_id"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="FloorResultMap">
+        SELECT floor.*,room.*,bed.*
+        FROM floor
+        LEFT JOIN room ON floor.id = room.floor_id
+        LEFT JOIN bed ON room.id = bed.room_id;
+    </select>
+
+</mapper>

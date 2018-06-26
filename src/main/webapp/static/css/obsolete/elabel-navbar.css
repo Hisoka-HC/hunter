@@ -1,0 +1,17 @@
+
+.navbar {
+    background-color: #ffd0aa !important;
+    color: #333 !important;
+}
+
+.nav li a, .navbar-brand {
+    color: #333 !important;
+}
+
+li.active a, .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+    background-color: #fcb67e !important;
+}
+
+.navbar-nav > .open > a:focus, .dropdown-menu {
+    background-color: #ffd0aa !important;
+}

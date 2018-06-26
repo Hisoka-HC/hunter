@@ -1,0 +1,3 @@
+target/
+.idea/
+src/main/source/conf/applicationContext.xml

@@ -1,0 +1,16 @@
+.geoProvinceText, .geoCityText, .geoStoreText{
+    cursor: pointer;
+    font-size:12px;
+}
+
+.geoProvinceText::before, geoCityText::before {
+    content: "+";
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.geoProvinceText.expanded::before, .geoCityText.expanded::before {
+    content: "-";
+    padding-right: 13px;
+    font-weight: bold;
+}

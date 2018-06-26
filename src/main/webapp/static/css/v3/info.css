@@ -1,0 +1,32 @@
+.info{
+    background-color: #fff6f4;
+    color:#333;
+    outline:2px solid #EEE;
+
+    position: absolute;
+    height:100%;
+    width:200px;
+    top:0px;
+    right:0px;
+    
+
+    transition: 300ms;
+    -moz-transition: 300ms; /* Firefox 4 */
+    -webkit-transition: 300ms; /* Safari 和 Chrome */
+    -o-transition: 300ms; /* Opera */
+
+    transform-origin:0 50%;
+}
+
+.info.showMenu{
+    right:-200px;
+    
+    transform:perspective(600px) rotateY(90deg);
+    -moz-transform:perspective(600px)  rotateY(90deg);
+    -webkit-transform:perspective(600px)  rotateY(90deg);
+    -o-transform:perspective(600px)  rotateY(90deg);
+}
+
+.infoHeader{
+    margin: 20px;
+}

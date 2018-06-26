@@ -1,0 +1,71 @@
+.elabel-menu, .elabel-menu-footer-left, .elabel-menu-item, .elabel-menu-topic {
+    user-select: none;
+}
+
+.elabel-menu {
+    position: absolute;
+    top: 0;
+    background-color: #E08031;
+    height: 100%;
+    width: 180px;
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+}
+
+.elabel-menu-group {
+    padding: 30px 0 0 0;
+    margin: 0;
+    z-index: 999;
+}
+
+.elabel-menu-topic {
+    color: #001933;
+    font-size: 17px;
+    margin: 0;
+    padding: 0px 0px 0px 30px;
+    font-weight: bold;
+    z-index: 999;
+
+}
+
+.elabel-menu-topic:hover {
+    cursor: default
+}
+
+.elabel-menu-item {
+    color: #001933;
+    font-size: 14px;
+    margin: 6px 0 6px 0;
+    padding: 3px 0px 3px 60px;
+    z-index: 999;
+}
+
+.elabel-menu-item:hover {
+    background-color: #323232;
+    cursor: pointer;
+    color: #ee9c53;
+    /* font-weight:bold; */
+}
+
+.elabel-menu-footer-left {
+    color: #001933;
+    position: fixed;
+    font-size: 13px;
+    bottom: 0;
+    margin: 0 0 10px 15px;
+    z-index: 999;
+}
+
+.elabel-menu-footer-right {
+    color: #001933;
+    position: fixed;
+    font-size: 13px;
+    bottom: 0;
+    margin: 0 0 10px 120px;
+    z-index: 999;
+}
+
+.elabel-menu-footer-left:hover, .elabel-menu-footer-right:hover {
+    cursor: pointer;
+}

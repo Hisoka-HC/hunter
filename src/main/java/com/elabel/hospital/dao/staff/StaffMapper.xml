@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.elabel.hospital.dao.staff.StaffMapper">
+    <insert id="insertStaff" parameterType="Staff" >
+        INSERT INTO staff(name,superior_id,department_id,position_id)VALUES(#{name},#{superiorId},#{departmentId},#{positionId});
+    </insert>
+    <select id="selectStaff" resultType="Staff">
+        SELECT  * FROM v_staff
+        <if test="limit!=null">
+            limit ${offset},${limit}
+        </if>;
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM v_staff;
+    </select>
+    <update id="updateStaff" parameterType="Staff">
+        UPDATE staff
+        SET name = #{name}
+        <if test="positionId!=null">
+            ,position_id = #{positionId}
+        </if>
+        <if test="superiorId!=null">
+            ,superior_id = #{superiorId}
+        </if>
+        <if test="departmentId!=null">
+            ,department_id = #{departmentId}
+        </if>
+        WHERE id = #{id};
+    </update>
+
+    <delete id="deleteStaff">
+        DELETE FROM staff
+        WHERE id = #{id};
+    </delete>
+</mapper>

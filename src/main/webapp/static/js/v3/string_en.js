@@ -1,0 +1,80 @@
+window.string = []
+window.string.headers = [];
+window.string.headers.code = "Store Id";
+window.string.headers.name = "Name";
+window.string.headers.provinceName = "Country";
+window.string.headers.cityName = "Province";
+window.string.headers.key = "Key";
+window.string.headers.address = "Address";
+window.string.headers.email = "Email";
+window.string.headers.mobile = "Mobile";
+window.string.headers.rootManager = "All Priviledges";
+window.string.headers.goodsManager = "Store Manager";
+window.string.headers.skuManager = "SKU Manager";
+window.string.headers.eslManager = "Goods Manager";
+window.string.headers.userManager = "User Manager";
+window.string.headers.tinyIp="Label ID"
+window.string.headers.tagType="Label Model"
+window.string.headers.barInfo="Battery"
+window.string.headers.updatedState="Waiting"
+window.string.headers.eslRssi="RSSI"
+window.string.headers.goodsSku="Bounded SKU"
+window.string.headers.goodsBarcode="Bounded Barcode"
+window.string.headers.goodsName="Bounded Name"
+
+window.string.tableName = [];
+window.string.tableName.store = "Store Table";
+window.string.tableName.sku = "SKU Table";
+window.string.tableName.goods = "Goods Table";
+window.string.tableName.user = "User Table";
+window.string.tableName.editorTitle = "Information";
+window.string.tableName.label="Label Table";
+window.string.tableName.addStore = "Add Store";
+window.string.tableName.addSku = "Add SKU";
+window.string.tableName.addGoods = "Add Goods";
+window.string.tableName.addUser = "Add User";
+window.string.tableName.labelStatus = "Label Status";
+window.string.function.reloadFile = "Reload File"
+
+
+window.string.tips = [];
+window.string.tips.insertSuccess = "Update Succeed";
+window.string.tips.insertFailed = "Update failed";
+window.string.tips.updateSuccess = "Update Succeed";
+window.string.tips.updateFailed = "Update failed";
+window.string.tips.importSuccess = "Import Success";
+window.string.tips.importFailed = "Import Failed";
+
+
+window.string.menu = [];
+window.string.menu.storeManagement = "Store Management";
+window.string.menu.goodsManagement = "Goods Management";
+window.string.menu.labelManagement = "Label Management";
+window.string.menu.userManagement = "User Management";
+window.string.menu.storeTable = "Store Table";
+window.string.menu.skuTable = "SKU Table";
+window.string.menu.goodsTable = "Goods Table";
+window.string.menu.labelTable = "Label Table";
+window.string.menu.userTable = "User Table";
+
+window.string.function = [];
+window.string.function.add = "Add";
+window.string.function.edit = "Edit";
+window.string.function.delete = "Delete";
+window.string.function.search = "Search";
+window.string.function.confirm = "Confirm";
+window.string.function.cancel = "Cancel";
+window.string.function.importSku = "Import SKU";
+window.string.function.importGoods = "Import Goods";
+window.string.function.toggleMenu = "Menu";
+window.string.function.refreshAll = "Refresh All"
+window.string.function.waitingCount = "Total Waiting Label"
+window.string.function.close = "Close";
+window.string.function.importOnsale = "Import Promotion";
+window.string.function.importStockAndOthers = "Import Stock And Other Information";
+window.string.function.exportReport="Export Report";
+
+window.string.keyword = "Keyword";
+window.string.logout = "Logout";
+window.string.switchLang = "中文";
+window.string.switchLangTarget = "cn";

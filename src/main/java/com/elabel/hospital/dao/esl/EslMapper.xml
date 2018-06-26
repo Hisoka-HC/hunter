@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.elabel.hospital.dao.esl.EslMapper">
+
+    <insert id="insertEsl" parameterType="Esl">
+        INSERT INTO esl (hospital_id,  tiny_ip, tag_type, tag_ver, stopped, bat_info, bat_percent, ap_rssi,
+                         esl_rssi, a_token, batch, login_count, update_count, login_time, update_time, updated_time,
+                         channel, channel_b, sys_map_id, esl_map_id, price, new_price, pattern_id, cmd, update_state, cloud_update_time)
+        VALUES (#{hospitalId}, #{patientId}, #{tinyIp}, #{tagType}, #{tagVer}, #{stopped}, #{batInfo}, #{batPercent},
+                               #{apRssi}, #{eslRssi},
+                               #{aToken}, #{batch},
+                                          #{loginCount}, #{updateCount}, #{loginTime}, #{updateTime}, #{updatedTime},
+                                          #{channel},
+                                          #{channelB}, #{sysMapId}, #{eslMapId}, #{price},
+                #{newPrice}, #{patternId}, #{cmd}, #{updateState}, #{cloudUpdateTime});
+    </insert>
+
+    <insert id="updateList" parameterType="java.util.List">
+        INSERT INTO esl
+        (hospital_id, tiny_ip, tag_type, tag_ver, stopped, bat_info, ap_rssi, esl_rssi, a_token,
+        batch, login_count, update_count, login_time, update_time, updated_time,
+        channel, channel_b, sys_map_id, esl_map_id, new_price,
+        price, pattern_id, cmd, update_state, bat_percent)
+        VALUES
+        <foreach collection="list" item="esl" separator=",">
+            (
+            #{esl.hospitalId},
+            #{esl.tinyIp},
+            #{esl.tagType},
+            #{esl.tagVer},
+            #{esl.stopped},
+            #{esl.batInfo},
+            #{esl.apRssi},
+            #{esl.eslRssi},
+            #{esl.aToken},
+            #{esl.batch},
+            #{esl.loginCount},
+            #{esl.updateCount},
+            #{esl.loginTime},
+            #{esl.updateTime},
+            #{esl.updatedTime},
+            #{esl.channel},
+            #{esl.channelB},
+            #{esl.sysMapId},
+            #{esl.eslMapId},
+            #{esl.newPrice},
+            #{esl.price},
+            #{esl.patternId},
+            #{esl.cmd},
+            #{esl.updateState},
+            #{esl.batPercent}
+            )
+        </foreach>
+        on duplicate key
+        UPDATE
+        stopped = values(stopped)
+        , bat_info = values(bat_info)
+        , ap_rssi = values(ap_rssi)
+        , esl_rssi = values(esl_rssi)
+        , batch = values(batch)
+        , login_count = values(login_count)
+        , update_count = values(update_count)
+        , login_time = values(login_time)
+        , update_time = values(update_time)
+        , updated_time = values(updated_time)
+        , channel = values(channel)
+        , sys_map_id = values(sys_map_id)
+        , esl_map_id = values(esl_map_id)
+        , price = values(price)
+        , pattern_id = values(pattern_id)
+        , cmd = values(cmd)
+        , update_state = values(update_state)
+        , bat_percent = values(bat_percent)
+    </insert>
+
+    <select id="selectEsl" resultType="Esl">
+        SELECT v_esl.`patient_id` AS code,v_esl.*
+        FROM v_esl
+        <if test="limit!=null">
+            limit ${offset},${limit}
+        </if>;
+    </select>
+
+    <select id="selectEslToBeDeleted" resultType="Esl">
+        select * from esl where hospital_id != #{hospitalId} and tiny_ip in
+        <foreach collection="list" item="esl" open="(" separator="," close=")">
+            #{esl.tinyIp}
+        </foreach>
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM v_esl;
+    </select>
+
+    <select id="selectUpdatedLabels" resultType="Esl">
+        SELECT v_esl.*,v_esl.`patient_id` AS barcode
+        FROM v_esl
+        WHERE hospital_id = #{hospitalId} AND cloud_update_time > #{lastLoginTime}
+        <if test="order!=null">
+            order by #{order}
+        </if>;
+    </select>
+
+    <update id="updateEslTime">
+        UPDATE esl
+        SET cloud_update_time = current_timestamp
+        WHERE esl.bed_id = #{bedId};
+    </update>
+
+    <update id="updateEsl" parameterType="Esl">
+        UPDATE esl
+        SET
+        cloud_update_time = current_timestamp
+        <if test="tagType!=null">
+            ,tag_type=#{tagType}
+        </if>
+        <if test="tagVer!=null">
+            ,tag_ver=#{tagVer}
+        </if>
+        <if test="stopped!=null">
+            ,stopped = #{stopped}
+        </if>
+        <if test="batInfo!=null">
+            ,bat_info=#{batInfo}
+        </if>
+        <if test="batPercent!=null">
+            ,bat_percent = #{batPercent}
+        </if>
+        <if test="apRssi!=null">
+            ,ap_rssi = #{apRssi}
+        </if>
+        <if test="eslRssi!=null">
+            ,esl_rssi = #{eslRssi}
+        </if>
+        <if test="aToken!=null">
+            ,a_token = #{aToken}
+        </if>
+        <if test="batch!=null">
+            ,batch = #{batch}
+        </if>
+        <if test="loginCount!=null">
+            ,login_count = #{loginCount}
+        </if>
+        <if test="updateCount!=null">
+            ,update_count = #{updateCount}
+        </if>
+        <if test="loginTime!=null">
+            ,login_time = #{loginTime}
+        </if>
+        <if test="updateTime!=null">
+            ,update_time = #{updateTime}
+        </if>
+        <if test="updatedTime!=null">
+            ,updated_time = #{updatedTime}
+        </if>
+        <if test="channel!=null">
+            ,channel = #{channel}
+        </if>
+        <if test="channelB!=null">
+            ,channel_b=#{channelB}
+        </if>
+        <if test="sysMapId!=null">
+            ,sys_map_id = #{sysMapId}
+        </if>
+        <if test="eslMapId!=null">
+            ,esl_map_id = #{eslMapId}
+        </if>
+        <if test="price!=null">
+            ,price = #{price}
+        </if>
+        <if test="newPrice!=null">
+            ,new_price = #{newPrice}
+        </if>
+        <if test="patternId!=null">
+            ,pattern_id = #{patternId}
+        </if>
+        <if test="cmd!=null">
+            ,cmd = #{cmd}
+        </if>
+        <if test="updateState!=null">
+            ,update_state = #{updateState}
+        </if>
+        WHERE tiny_ip = #{tinyIp};
+    </update>
+
+    <delete id="deleteEsl">
+        DELETE FROM esl
+        WHERE id = #{id};
+    </delete>
+
+    <delete id="deleteEsls">
+        delete from esl where tiny_ip in
+        <foreach collection="list" item="esl" open="(" separator="," close=")">
+            #{esl.tinyIp}
+        </foreach>
+    </delete>
+
+</mapper>

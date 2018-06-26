@@ -1,0 +1,103 @@
+.menu {
+    background-color: #111;
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    letter-spacing: 1px;
+    /* border-right: 1px solid #888; */
+    transition: 300ms;
+    -moz-transition: 300ms;
+    /* Firefox 4 */
+    -webkit-transition: 300ms;
+    /* Safari 和 Chrome */
+    -o-transition: 300ms;
+    /* Opera */
+    z-index: 1056;
+    color: #FFF;
+}
+
+.menu.shown {
+    left: 0px;
+    transform: perspective(600px) rotateY(0deg);
+    -moz-transform: perspective(600px) rotateY(0deg);
+    -webkit-transform: perspective(600px) rotateY(0deg);
+    -o-transform: perspective(600px) rotateY(0deg);
+}
+
+.menu.hided {
+    left: -150px;
+    transform: perspective(600px) rotateY(-90deg);
+    -moz-transform: perspective(600px) rotateY(-90deg);
+    -webkit-transform: perspective(600px) rotateY(-90deg);
+    -o-transform: perspective(600px) rotateY(-90deg);
+}
+
+.menu-wrapper {
+    margin-top: 0;
+    padding-top: 30px;
+    padding-left: 15px;
+}
+
+.menu-item {
+    border-top: 1px solid #555;
+    padding-top: 5px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.menu-item-trigger {
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.menu-item-trigger:hover {
+    background-color: #C06016
+}
+
+.submenu-wrapper {
+    margin-top: 3px;
+    padding: 0
+}
+
+.submenu-wrapper.shrunk {
+    display: none;
+}
+
+.submenu-item {
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+.submenu-item:hover {
+    background-color: #C06016;
+}
+
+#logout {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    z-index: 999;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#logout:hover {
+    color: #F0B789;
+}
+
+.switchLang{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    z-index: 999;
+    cursor: pointer;
+    font-size: 12px;
+}
+.switchLang:hover{
+    color: #F0B789;
+}

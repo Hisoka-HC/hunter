@@ -1,0 +1,100 @@
+
+input[type="checkbox"].red + label {
+    width: 30%;
+    height: 20px;
+    position: relative;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"].red + label {
+    cursor: pointer;
+    position: inline-block;
+}
+
+input[type="checkbox"][readonly="readonly"].red + label {
+    cursor: default
+}
+
+input[type="checkbox"].red + label:after,
+input[type="checkbox"].red + label:before {
+    content: '';
+    left: 0px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+}
+
+input[type="checkbox"].red + label {
+    background: #eee;
+    border-radius: 20px;
+}
+
+input[type="checkbox"][readonly='readonly'].red + label {
+    background: #AAA;
+}
+
+input[type="checkbox"].red + label:after {
+    background: -webkit-linear-gradient(left, #252525, #666);
+    border-radius: 50%;
+    float: left !important;
+    left: 0px
+    /* box-shadow: 1px 1px 3px #aaa; */
+}
+
+input[type="checkbox"].red + label:after,
+input[type="checkbox"].red + label:before {
+    content: '';
+    /* display: block; */
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+input[type="checkbox"][readonly="readonly"].red + label:after,
+input[type="checkbox"][readonly="readonly"].red + label:before {
+    cursor: default;
+}
+
+input[type="checkbox"].red {
+    display: none;
+    margin: 0;
+    padding: 0
+}
+
+input[type="checkbox"].red:checked + label:after {
+    left: calc(100% - 20px);
+    background: -webkit-linear-gradient(left, rgb(241, 159, 92), #E08031);
+
+    float: left !important;
+}
+
+
+input[type="checkbox"].red:checked + label:hover:after {
+    background: -webkit-linear-gradient(left, rgb(243, 116, 70), rgb(235, 89, 35));
+    box-shadow: 1px 1px 2px #555
+}
+
+input[type="checkbox"].red + label:hover:after {
+    background: -webkit-linear-gradient(left, #252525, #252525);
+    box-shadow: 1px 1px 2px #555
+}
+
+input[type="checkbox"][readonly="readonly"].red + label:hover:after {
+    background: -webkit-linear-gradient(left, #252525, #666);
+    box-shadow: 0px 0px 0px
+}
+
+input[type="checkbox"][readonly="readonly"].red:checked + label:hover:after {
+    background: -webkit-linear-gradient(left, rgb(241, 159, 92), #E08031);
+    box-shadow: 0px 0px 0px
+}
+

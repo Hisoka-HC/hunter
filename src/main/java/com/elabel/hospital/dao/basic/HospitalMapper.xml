@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.elabel.hospital.dao.basic.HospitalMapper">
+
+    <resultMap id="ResultMap" type="Floor">
+        <id property="id" column="id"/>
+        <result property="name" column="floor_name"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="roomCount" column="room_count"/>
+        <result property="bedCount" column="bed_count"/>
+        <collection property="roomList" column="floor_id" ofType="Room" resultMap="RoomResultMap"/>
+    </resultMap>
+
+    <resultMap id="RoomResultMap" type="Room">
+        <id property="id" column="room_id"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="name" column="room_name"/>
+        <result property="floorId" column="floor_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="bedCount" column="bed_count"/>
+        <collection property="bedList" column="bed_room_id" resultMap="BedResultMap"/>
+    </resultMap>
+
+    <resultMap id="BedResultMap" type="Bed">
+        <id property="id" column="bed_id"/>
+        <result column="bed_room_id" property="roomId"/>
+        <result property="hospitalId" column="hospital_id"/>
+        <result property="name" column="name"/>
+        <result property="floorId" column="floor_id"/>
+        <result property="floorName" column="floor_name"/>
+        <result property="roomId" column="room_id"/>
+        <result property="roomName" column="room_name"/>
+        <association property="patient" resultMap="Patient"/>
+    </resultMap>
+
+    <resultMap id="Patient" type="Patient">
+        <id property="id" column="patient_id"/>
+        <result property="name" column="patient_name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="admittedTime" column="admitted_time"/>
+    </resultMap>
+
+
+    <insert id="insertHospital" parameterType="Hospital">
+        INSERT INTO hospital(name,address)VALUES(#{name},#{address});
+    </insert>
+
+
+    <update id="updateHospital" parameterType="Hospital">
+        UPDATE hospital
+        SET id = #{id}
+        <if test="name!=null">
+            ,name = #{name}
+        </if>
+        <if test="address!=null">
+            ,address = #{address}
+        </if>
+        WHERE id = #{id};
+    </update>
+
+    <update id="clientRefreshHospital" parameterType="map">
+        UPDATE hospital
+        SET client_login_time = current_timestamp()
+        WHERE id = #{name};
+    </update>
+
+    <delete id="deleteHospital">
+        DELETE FROM hospital
+        WHERE id = #{id};
+    </delete>
+
+    <select id="selectHospitalWhereKey" resultType="Hospital" >
+        SELECT *
+        FROM hospital
+        WHERE hospital.id = #{key}
+        <if test="order!=null">
+            ORDER BY #{order}
+        </if>;
+    </select>
+
+
+    <select id="selectHospital" resultType="Hospital">
+        SELECT * FROM hospital
+        <if test="limit!=null">
+            limit ${offset},${limit}
+        </if>;
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM hospital;
+    </select>
+
+    <select id="selectByFloor" resultMap="ResultMap">
+        SELECT floor.id,floor.name AS floor_name,floor.hospital_id,COUNT(bed.`id`) bed_count,COUNT(room.`id`) room_count
+        ,room.name AS room_name,room.`department_id`,room.`id` AS room_id
+        ,bed.`name`,bed.`id` AS bed_id,bed.room_id AS bed_room_id
+        ,patient.id AS petient_id,patient.name AS patient_name,patient.age,patient.gender,patient.admitted_time
+        FROM floor
+        LEFT JOIN room ON floor.id = room.floor_id
+        LEFT JOIN bed ON room.id = bed.room_id
+        LEFT JOIN patient ON bed.`id` = patient.`bed_id`
+        WHERE 1=1
+        <if test="floorName!=null">
+            AND floor.`name`=#{floorName}
+        </if>
+        <if test="roomName!=null">
+            AND room.`name` = #{roomName}
+        </if>
+        <if test="bedCode!=null">
+            AND bed.`code`= #{bedCode}
+        </if>
+        <if test="patientName!=null">
+            AND patient.`name`=#{patientName}
+        </if>
+        <if test="patientAge!=null">
+            AND patient.`age` = #{patientAge}
+        </if>
+        <if test="patientGender!=null">
+            AND patient.`gender` = #{patientGender}
+        </if>
+        <if test="diseaseName!=null">
+            AND disease.`name` = #{diseaseName}
+        </if>
+        <if test="keyword!=null">
+            AND (patientName like '%${keyword}%' or diseaseName like '%${keyword}%')
+        </if>
+        <if test="firstKeyword!=null">
+            AND (patientName like '${firstKeyword}%' or diseaseName like '${firstKeyword}%')
+        </if>
+        <if test="order!=null">
+            ORDER BY #{order}
+        </if>;
+    </select>
+
+
+</mapper>

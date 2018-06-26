@@ -1,0 +1,94 @@
+#main {
+    position: absolute;
+    width: calc(100% - 200px);
+    height: 100%;
+    background-color: #f9f9f9;
+    transition: 300ms;
+    -moz-transition: 300ms;
+    /* Firefox 4 */
+    -webkit-transition: 300ms;
+    /* Safari 和 Chrome */
+    -o-transition: 300ms;
+    /* Opera */
+}
+
+#main.showMenu {
+    left: 200px;
+}
+
+#main.notShowMenu {
+    left: 0px;
+}
+
+#mainTablePane {
+    position: absolute;
+    left: 5px;
+    top: 30px;
+    height: calc(100% - 40px);
+    width: calc(100% - 10px);
+}
+
+#menu-trigger {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.modal-footer {
+    padding-right: 20px;
+}
+
+.modal-title {
+    font-size: 16px;
+    /* font-weight: bold */
+}
+
+.modal-body label, .modal-body input {
+    font-size: 13px;
+}
+
+.importTable th, .importTable td {
+    white-space: nowrap;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+}
+
+.importTable th {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.importTable td {
+    font-size: 12px;
+}
+
+.importTable caption {
+    font-size: 14px
+}
+
+.modalTableTotal {
+    font-size: 12px;
+}
+
+.importModalResult {
+    font-size: 12px;
+    margin: 15px;
+}
+
+.importModalResultHeader {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.managerInput {
+    margin-left: 100px !important;
+    height: 18px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.importModalResult{
+    overflow-x: auto;
+}
